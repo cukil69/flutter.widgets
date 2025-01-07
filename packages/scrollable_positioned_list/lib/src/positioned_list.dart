@@ -336,6 +336,7 @@ class _PositionedListState extends State<PositionedList> {
             if (!reveal.isFinite) continue;
             final itemOffset =
                 reveal - viewport.offset.pixels + anchor * viewport.size.height;
+            if (!itemOffset.isFinite) continue;
             positions.add(ItemPosition(
                 index: key.value,
                 itemLeadingEdge: itemOffset.round() /

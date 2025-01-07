@@ -179,8 +179,12 @@ class UnboundedRenderViewport extends RenderViewport {
     var count = 0;
     do {
       assert(offset.pixels != null);
+      double correctedOffset = offset.pixels + centerOffsetAdjustment;
+      if (!correctedOffset.isFinite) {
+        correctedOffset = 0;
+      }
       correction = _attemptLayout(mainAxisExtent, crossAxisExtent,
-          offset.pixels + centerOffsetAdjustment);
+          correctedOffset);
       if (correction != 0.0) {
         offset.correctBy(correction);
       } else {

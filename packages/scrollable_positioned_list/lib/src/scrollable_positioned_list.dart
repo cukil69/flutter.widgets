@@ -505,6 +505,10 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
     Curve curve = Curves.linear,
     required List<double> opacityAnimationWeights,
   }) async {
+    if (primary.scrollController.position.viewportDimension <= 0) {
+      _stopScroll(canceled: true);
+      return;
+    }
     if (index > widget.itemCount - 1) {
       index = widget.itemCount - 1;
     }
